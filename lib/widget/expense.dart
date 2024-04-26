@@ -26,10 +26,25 @@ class _ExpenseState extends State<Expense> {
     )
   ];
 
+  void _addExpense(Expenses expenses) {
+    setState(() {
+      _registeredExpenses.add(expenses);
+    });
+  }
+
+  void _removeExpense(Expenses expenses) {
+    setState(() {
+      _registeredExpenses.remove(expenses);
+    });
+  }
+
   void _openAddExpensesOverlay() {
     showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
-      builder: (ctx) => const NewExpense(),
+      builder: (ctx) => NewExpense(
+        onAddExpense: _addExpense,
+      ),
     );
   }
 
@@ -49,7 +64,10 @@ class _ExpenseState extends State<Expense> {
         children: [
           const Text('Chart'),
           Expanded(
-            child: ExpensesList(expenses: _registeredExpenses),
+            child: ExpensesList(
+              expenses: _registeredExpenses,
+              onRemovedExpenses: _removeExpense,
+            ),
           ),
         ],
       ),
