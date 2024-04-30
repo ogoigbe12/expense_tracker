@@ -1,3 +1,4 @@
+import 'package:expense_tracker/widget/chart/chart.dart';
 import 'package:expense_tracker/widget/expenses_list/list_expenses.dart';
 import 'package:expense_tracker/models/expenses.dart';
 import 'package:expense_tracker/widget/new_expense.dart';
@@ -13,13 +14,13 @@ class Expense extends StatefulWidget {
 class _ExpenseState extends State<Expense> {
   final List<Expenses> _registeredExpenses = [
     Expenses(
-      amount: 5000000,
+      amount: 5000,
       category: Category.food,
       date: DateTime.now(),
       title: 'rice',
     ),
     Expenses(
-      amount: 10000,
+      amount: 100000,
       category: Category.leisure,
       date: DateTime.now(),
       title: 'pool bath',
@@ -89,7 +90,7 @@ class _ExpenseState extends State<Expense> {
       ),
       body: Column(
         children: [
-          const Text('Chart'),
+          Chart(expenses: _registeredExpenses),
           Expanded(child: mainConnect),
         ],
       ),
